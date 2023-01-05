@@ -33,10 +33,12 @@ app.get("/api", (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
+  res.set('Access-Control-Allow-Origin', '*');
   app.use(express.static(path.join(__dirname, "../client", "build")));
   app.get("/*", function (req, res) {
     res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
   });
+  
 }
 
 app.use(express.json());
@@ -45,7 +47,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+
 app.use("/api/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
