@@ -45,6 +45,7 @@ export const createActivity = async (req, res) => {
 
     res.status(201).json(filtered_activities);
   } catch (err) {
+    
     res.status(409).json({ message: err.message });
   }
 };
