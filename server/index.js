@@ -28,12 +28,13 @@ if (process.env.NODE_ENV === "development") {
 // define routes
 app.get("/api", (req, res) => {
   // send the request back to the client
+  res.set('Access-Control-Allow-Origin', '*');
   console.log("GET /api");
   res.send({ message: "Hello from the server!" }).status(200);
 });
 
 if (process.env.NODE_ENV === "production") {
-  res.set('Access-Control-Allow-Origin', '*');
+  
   app.use(express.static(path.join(__dirname, "../client", "build")));
   app.get("/*", function (req, res) {
     res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
