@@ -106,7 +106,9 @@ export const authSlice = createSlice({
     },
     setParticipation: (state, action) => {
       if (state.user) {
-        state.user.participation = action.payload.participation;
+        let newParticipation = action.payload.participation;
+
+        state.user.participation = newParticipation.filter((p)=>!p.deleted)
       } else {
         console.error("user friends non-existent :(");
       }

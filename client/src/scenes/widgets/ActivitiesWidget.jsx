@@ -20,8 +20,8 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-
-    dispatch(setActivities({ activities: data }));
+    const newActivities = data.filter((activity) => !activity.deleted)
+    dispatch(setActivities({ activities: newActivities }));
     
   };
 
@@ -35,8 +35,8 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
       }
     );
     const data = await response.json();
-
-    dispatch(setActivities({ activities: data }));
+    const newActivities = data.filter((activity) => !activity.deleted)
+    dispatch(setActivities({ activities: newActivities }));
     
   };
 
@@ -69,6 +69,7 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
           friendOnly,
           heading,
           limit,
+          deleted
         }) => (
           <ActivityWidget
             key={_id}
@@ -89,6 +90,7 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
             limit={limit}
             editOpen={editOpen}
             setEditOpen={setEditOpen}
+            deleted={deleted}
           />
         )
       ) : <></>}

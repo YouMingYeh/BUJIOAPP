@@ -9,6 +9,7 @@ import ActivitiesWidget from "scenes/widgets/ActivitiesWidget";
 import UserWidget from "scenes/widgets/UserWidget";
 import CircularProgress from '@mui/material/CircularProgress';
 import LoadingPage from "components/LoadingPage";
+import DeletedActivities from "scenes/widgets/DeletedActivitiesWidget";
 import api from '../../../src/connection'
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -74,6 +75,15 @@ const ProfilePage = () => {
 
           <ActivitiesWidget profileId={userId} isProfile userId={_id} />
         </Box>
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+          
+          <Box m="2rem 0" />
+          {
+            userId === _id &&
+            <DeletedActivities userId={_id}></DeletedActivities>
+          }
+        </Box>
+        
       </Box>
       }
     </Box>

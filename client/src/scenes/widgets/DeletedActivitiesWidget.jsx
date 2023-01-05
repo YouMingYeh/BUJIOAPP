@@ -34,7 +34,7 @@ const DeletedActivities = ({ userId }) => {
     });
     const data = await response.json();
     const newActivities = data.filter(activity=>activity.deleted&&activity.host === userId);
-
+    
     setActivities(newActivities);
     
   };
@@ -59,7 +59,7 @@ const DeletedActivities = ({ userId }) => {
       <Divider></Divider>
       <Box display="flex" flexDirection="column" gap="1.5rem">
         {activities.map((p, i) => {
-          if (i === 0) return <div key={i}></div>
+          
           return (
             <Button variant="text" key={p.heading + i + 'button'} color="inherit" onClick={() => {
               setOpenModal(!openModal)

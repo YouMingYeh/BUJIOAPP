@@ -36,6 +36,7 @@ import Stack from "@mui/material/Stack";
 import EditIcon from '@mui/icons-material/Edit';
 import EditModalWidget from "./components/EditModalWidget";
 import LoadingPage from "../../components/LoadingPage";
+import DeletedActivities from "./DeletedActivitiesWidget";
 import api from '../../../src/connection'
 const style = {
   position: 'absolute',
@@ -80,6 +81,7 @@ const ActivityWidget = ({
   limit,
   editOpen,
   setEditOpen,
+  deleted
 }) => {
   const shareURL = "http://localhost:3000/home";
 
@@ -110,6 +112,7 @@ const ActivityWidget = ({
     friendOnly: friendOnly,
     heading: heading,
     limit: limit,
+    deleted: deleted,
   });
   // edit activity 
 
@@ -129,6 +132,7 @@ const ActivityWidget = ({
     );
     const updatedActivity = await response.json();
     dispatch(setActivity({ activity: updatedActivity }));
+    console.log(updatedActivity);
     setLoad(true);
   };
 
@@ -402,6 +406,7 @@ const ActivityWidget = ({
             Join
           </Button>
         )}
+
       </FlexBetween>
     </WidgetWrapper>
   );

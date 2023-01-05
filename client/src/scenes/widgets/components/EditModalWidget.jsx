@@ -35,7 +35,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActivities } from "state";
 import { light } from "@mui/material/styles/createPalette";
 import dayjs from "dayjs";
-
+import DeleteAlert from './DeleteAlert' 
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 
@@ -270,6 +270,7 @@ const EditModalWidget = ({ change, setChange }) => {
           >
             POST
           </Button> */}
+          <DeleteAlert change={change} setChange={setChange}></DeleteAlert>
       </FlexBetween>
     </WidgetWrapper>
   );

@@ -31,6 +31,7 @@ export const createActivity = async (req, res) => {
       date: date,
       friendOnly: friendOnly,
       limit: limit,
+      deleted: false,
     });
     await newActivity.save();
     await Activity.find().sort({ date: 1 });
@@ -128,8 +129,7 @@ export const patchActivity = async (req, res) => {
     
     let updatedActivity = await Activity.findByIdAndUpdate({_id: id},activity)
 
-    const activities = await Activity.find()
-    res.status(200).json(activities);
+    res.status(200).json(updatedActivity);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

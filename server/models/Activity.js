@@ -40,6 +40,7 @@ const ActivitySchema = new mongoose.Schema(
     friendOnly: Boolean,
     heading: String,
     limit: Number,
+    deleted: Boolean,
   },
   { timestamps: true }
 );
