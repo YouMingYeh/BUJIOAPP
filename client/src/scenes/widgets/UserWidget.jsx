@@ -51,7 +51,8 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     try{
       const response = await fetch(`${api}/users/${id}`, {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: { Authorization: `Bearer ${token}` },
+        "Content-Type": "application/json",
       });
       console.log(response.clone());
       const data = await response.json();
@@ -78,6 +79,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     const response = await fetch(`${api}/users/${userId}`, {
       method: "PATCH",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
