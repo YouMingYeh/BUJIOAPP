@@ -35,20 +35,20 @@ const HomePage = () => {
         sx={{ my: 8 }}
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <UserWidget userId={_id} picturePath={picturePath} />
+          {/* <UserWidget userId={_id} picturePath={picturePath} /> */}
           <Divider sx={{ m: 1 }}></Divider>
           {/* <ParticipationWidget userId={_id}></ParticipationWidget> */}
         </Box>
 
-        {/* <Box
+        <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-          <MyActivityWidget picturePath={picturePath} />
+          {/* <MyActivityWidget picturePath={picturePath} /> */}
 
           <ActivitiesWidget userId={_id} />
         </Box>
-        {isNonMobileScreens && (
+        {/* {isNonMobileScreens && (
           
           <Box flexBasis="26%">
             <InvitationWidget userId={_id} />
