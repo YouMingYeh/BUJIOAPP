@@ -14,7 +14,7 @@ const InvitationWidget = ({ userId }) => {
 
   const getInvitations = async () => {
     const response = await fetch(
-      `${api}users/${userId}/invitations`,
+      `${api}/users/${userId}/invitations`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

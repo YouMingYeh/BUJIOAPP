@@ -93,7 +93,7 @@ const MyActivityWidget = ({ picturePath }) => {
       formData.append("picturePath", image.name);
     }
 
-    const response = await fetch(`${api}activities`, {
+    const response = await fetch(`${api}/activities`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
@@ -190,10 +190,10 @@ const MyActivityWidget = ({ picturePath }) => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Stack direction="row" justifyContent="center">
-                    {defaultTags.map((tag) => {
+                    {defaultTags.map((tag, i) => {
                       return (
                         <Chip
-                          key={tag}
+                          key={tag + i}
                           sx={{ m: 0.5, fontWeight: 550, fontSize: 14 }}
                           label={tag}
                           onClick={() => {

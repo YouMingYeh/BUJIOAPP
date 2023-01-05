@@ -28,7 +28,7 @@ const DeletedActivities = ({ userId }) => {
   };
   const getActivities = async () => {
     console.log("getting activities");
-    const response = await fetch(`${api}activities/${userId}`, {
+    const response = await fetch(`${api}/activities/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -65,11 +65,11 @@ const DeletedActivities = ({ userId }) => {
               setOpenModal(!openModal)
               setModalAct(p)
             }}>
-              <Box key={p.heading + i} gap="1rem">
+              <Box key={p.heading + i+i} gap="1rem">
                 <Typography key={p.heading + i} fontWeight="bold" variant="h6">
                   {p.heading}
                 </Typography>
-                <Typography key={p.heading + i}>hosted by {p.name}.</Typography>
+                <Typography key={p.heading + i+i+i}>hosted by {p.name}.</Typography>
               </Box>
             </Button>
           );

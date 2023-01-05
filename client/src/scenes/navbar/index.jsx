@@ -82,7 +82,7 @@ const Navbar = ({ userId, picturePath }) => {
 
   const getFinding = async () => {
     console.log(finding)
-    const findingResponse = await fetch(`${api}findings`, {
+    const findingResponse = await fetch(`${api}/findings`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: finding }),

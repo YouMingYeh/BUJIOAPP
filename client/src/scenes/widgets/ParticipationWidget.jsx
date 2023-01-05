@@ -30,7 +30,7 @@ const ParticipationWidget = ({ userId }) => {
     p: 4,
   };
   const getUser = async () => {
-    const response = await fetch(`${api}users/${userId}`, {
+    const response = await fetch(`${api}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -66,7 +66,7 @@ const ParticipationWidget = ({ userId }) => {
               setModalAct(p)
             }}>
               <Box key={p.heading + i} gap="1rem">
-                <Typography key={p.heading + i} fontWeight="bold" variant="h6">
+                <Typography key={p.heading + i+i} fontWeight="bold" variant="h6">
                   {p.heading}
                 </Typography>
                 <Typography key={p.heading + i}>hosted by {p.name}.</Typography>

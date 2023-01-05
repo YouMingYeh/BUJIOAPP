@@ -15,7 +15,7 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
 
   const getActivities = async () => {
     console.log("getting activities");
-    const response = await fetch(`${api}activities/${userId}`, {
+    const response = await fetch(`${api}/activities/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -28,7 +28,7 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
   const getUserActivities = async () => {
     console.log("getting user activities");
     const response = await fetch(
-      `${api}activities/${profileId}/activities/${userId}`,
+      `${api}/activities/${profileId}/activities/${userId}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

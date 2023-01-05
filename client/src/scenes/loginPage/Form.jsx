@@ -62,7 +62,7 @@ const Form = () => {
   const handleCallbackResponse = async (response) => {
     // console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
-    const gResponse = await fetch(`${api}auth/googleLogin`, {
+    const gResponse = await fetch(`${api}/auth/googleLogin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userObject),
@@ -108,7 +108,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      `${api}auth/register`,
+      `${api}/auth/register`,
       {
         method: "POST",
         body: formData,
@@ -130,7 +130,7 @@ const Form = () => {
   const login = async (values, onSubmitProps) => {
     console.log("values: ", values);
     console.log("JSON.stringify(values): ", JSON.stringify(values));
-    const loggedInResponse = await fetch(`${api}auth/login`, {
+    const loggedInResponse = await fetch(`${api}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),

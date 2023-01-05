@@ -56,10 +56,10 @@ function verifyImage(image_url) {
     return image_url;
   }
   var http = new XMLHttpRequest();
-  http.open("HEAD", `${api}assets/${image_url}`, false);
+  http.open("HEAD", `${api}/assets/${image_url}`, false);
   http.send();
   if (http.status !== 404) {
-    return `${api}assets/${image_url}`;
+    return `${api}/assets/${image_url}`;
   }
 }
 
@@ -120,7 +120,7 @@ const ActivityWidget = ({
   const patchActivity = async () => {
 
     const response = await fetch(
-      `${api}activities/${activityId}`,
+      `${api}/activities/${activityId}`,
       {
         method: "PATCH",
         headers: {
@@ -149,7 +149,7 @@ const ActivityWidget = ({
   const patchJoin = async () => {
     
     const response = await fetch(
-      `${api}activities/${activityId}/join`,
+      `${api}/activities/${activityId}/join`,
       {
         method: "PATCH",
         headers: {
@@ -170,7 +170,7 @@ const ActivityWidget = ({
   const getUser = async (id) => {
     // console.log("get user");
     // console.log(JSON.stringify({ userId: loggedInUserId }))
-    const response = await fetch(`${api}users/${id}`, {
+    const response = await fetch(`${api}/users/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -279,7 +279,7 @@ const ActivityWidget = ({
             display: "block",
             marginBottom: "1rem",
           }}
-          src={`${api}assets/${picturePath}`}
+          src={`${api}/assets/${picturePath}`}
         />
       )}
 
@@ -344,7 +344,7 @@ const ActivityWidget = ({
             >
               {participants.map((friend, i) => (
                 <Typography
-                  key={"menu" + i}
+                  key={"menu" + i+i}
                   sx={{ px: "0.6rem", py: "0.2rem" }}
                 >
                   <Friend

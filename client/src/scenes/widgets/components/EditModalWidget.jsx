@@ -96,11 +96,11 @@ const EditModalWidget = ({ change, setChange }) => {
       <br />
       <br />
       <Stack direction="row" justifyContent="center" sx={{ flexWrap: "wrap" }}>
-        {change.tags.map((tag) => {
-          if (tag === '') return <></>
+        {change.tags.map((tag, i) => {
+          if (tag === '') return <div key={i}></div>
           return (
             <Chip
-              key={tag}
+              key={tag+i}
               sx={{ m: 0.5, fontWeight: 550, fontSize: 14 }}
               label={tag}
               onDelete={() => {

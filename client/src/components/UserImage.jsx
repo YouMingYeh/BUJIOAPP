@@ -6,10 +6,10 @@ function verifyImage(image_url) {
     return image_url;
   }
   var http = new XMLHttpRequest();
-  http.open("HEAD", `${api}assets/${image_url}`, false);
+  http.open("HEAD", `${api}/assets/${image_url}`, false);
   http.send();
   if (http.status !== 404) {
-    return `${api}assets/${image_url}`;
+    return `${api}/assets/${image_url}`;
   }
 }
 

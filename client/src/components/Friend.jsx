@@ -38,7 +38,7 @@ const Friend = ({
 
   const handleFriends = async () => {
     const response = await fetch(
-      `${api}users/${_id}/${friendId}`,
+      `${api}/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {

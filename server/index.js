@@ -33,7 +33,10 @@ app.get("/api", (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  
+  app.use(express.static(path.join(__dirname, "../client", "build")));
+  app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+  });
 }
 
 app.use(express.json());
@@ -43,7 +46,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use("/api/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
@@ -57,14 +60,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register);
-app.post("/activities", verifyToken, upload.single("picture"), createActivity);
+app.post("/api/auth/register", upload.single("picture"), register);
+app.post("/api/activities", verifyToken, upload.single("picture"), createActivity);
 
 /* ROUTES */
-app.use("/findings", findingsRoutes);
-app.use("/auth", authRoutes);
-app.use("/users", userRoutes);
-app.use("/activities", activityRoutes);
+app.use("/api/findings", findingsRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/activities", activityRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;

@@ -20,7 +20,7 @@ const ProfilePage = () => {
   const [isFetching, setIsFetching] = useState(true);
 
   const getUser = async () => {
-    const response = await fetch(`${api}users/${userId}`, {
+    const response = await fetch(`${api}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

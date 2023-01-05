@@ -48,7 +48,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   const [DP, setDP] = useState("");
 
   const getUser = async (id) => {
-    const response = await fetch(`${api}users/${id}`, {
+    const response = await fetch(`${api}/users/${id}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -82,7 +82,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
 
   const patchUser = async () => {
     console.log(DP);
-    const response = await fetch(`${api}users/${userId}`, {
+    const response = await fetch(`${api}/users/${userId}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
