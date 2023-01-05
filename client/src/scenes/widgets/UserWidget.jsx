@@ -49,13 +49,12 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
 
   const getUser = useCallback(async (id) => {
     try{
-      
       const response = await fetch(`${api}/users/${id}`, {
         method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { "Content-Type": "application/json" },
       });
-  
-      const data = await response.clone().json();
+      console.log(response.clone());
+      const data = await response.json();
       console.log(data)
       setUser(data);
     }catch(e){
@@ -79,7 +78,6 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     const response = await fetch(`${api}/users/${userId}`, {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
