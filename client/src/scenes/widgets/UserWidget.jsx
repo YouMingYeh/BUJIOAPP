@@ -28,6 +28,7 @@ import api from '../../../src/connection'
 
 const UserWidget = ({ userId, picturePath, profileId = null }) => {
   const [user, setUser] = useState(null);
+  // const u = useSelector((state)=>state.user)
   const { palette } = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -63,13 +64,9 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     }
   }, [FB, IG, IN, DP]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // useEffect(() => {
-  //   setFB(Facebook)
-  //   setIG(Instagram)
-  // },[])
-
+  
   if (!user) {
-    return null;
+    return 
   }
 
   const {
@@ -106,6 +103,8 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     setIN(updatedUser.selfIntro);
     setDP(updatedUser.department);
   };
+
+  
 
   if (profileId) {
     return (
