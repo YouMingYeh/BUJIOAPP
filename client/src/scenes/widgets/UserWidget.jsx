@@ -27,7 +27,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import api from '../../../src/connection'
 
 const UserWidget = ({ userId, picturePath, profileId = null }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   // const u = useSelector((state)=>state.user)
   const { palette } = useTheme();
   const navigate = useNavigate();
@@ -48,7 +48,6 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   const [DP, setDP] = useState("");
 
   const getUser = useCallback(async (id) => {
-    var responseClone
     try{
       
       const response = await fetch(`${api}/users/${id}`, {
@@ -56,12 +55,11 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
   
-      responseClone = await response.clone();
-      const data = await responseClone.json();
-      console.log(responseClone)
+      const data = await response.clone().json();
+      console.log(data)
       setUser(data);
     }catch(e){
-      console.log('err:', e, 'response:', responseClone);
+      console.log('err:', e);
     }
   });
 
@@ -71,11 +69,8 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     } else {
       getUser(userId);
     }
-  }, [FB, IG, IN, DP]); // eslint-disable-line react-hooks/exhaustive-deps
-  
-  useEffect(()=>{
+  }, [FB, IG, IN, DP]);
 
-  },[user])
   
   
 
@@ -104,6 +99,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   });
 
   
+  if(!user) return
 
   if (profileId) {
     return (
