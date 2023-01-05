@@ -52,6 +52,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
       const response = await fetch(`${api}/users/${id}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
+        'Content-Type': 'application/json'
       });
       console.log(response.clone());
       const data = await response.json();
