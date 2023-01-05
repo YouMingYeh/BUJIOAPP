@@ -57,6 +57,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   const [DP, setDP] = useState("");
 
   const getUser = useCallback(async (id) => {
+    var responseClone
     try{
       
       const response = await fetch(`${api}/users/${id}`, {
@@ -64,12 +65,12 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
   
-      const responseClone = await response.clone();
+      responseClone = await response.clone();
       const data = await responseClone.json();
       console.log(responseClone)
       setUser(data);
     }catch(e){
-      console.log(e);
+      console.log('err:', e, 'response:', responseClone);
     }
   });
 
