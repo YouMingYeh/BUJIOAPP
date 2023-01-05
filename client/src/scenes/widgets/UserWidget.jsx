@@ -25,6 +25,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import EmailIcon from "@mui/icons-material/Email";
 import api from '../../../src/connection'
+import axios from "axios";
 
 const UserWidget = ({ userId, picturePath, profileId = null }) => {
   const [user, setUser] = useState();
@@ -49,14 +50,13 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
 
   const getUser = useCallback(async (id) => {
     try{
-      const response = await fetch(`${api}/users/${id}`, {
-        method: "GET",
+      const response = await axios.get(`${api}/users/${id}`,{
         headers: { Authorization: `Bearer ${token}` },
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      });
-      console.log(response.clone());
-      const data = await response.json();
+      })
+      
+      const {data} = await response;
       console.log(data)
       setUser(data);
     }catch(e){
@@ -76,27 +76,31 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   
 
   const patchUser = useCallback(async () => {
-    console.log(DP);
-    const response = await fetch(`${api}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    
+    const response = await axios.patch(`${api}/users/${userId}`,
+      {
         Facebook: FB !== "" ? FB : user.Facebook,
         Instagram: IG !== "" ? IG : user.Instagram,
         selfIntro: IN !== "" ? IN : user.selfIntro,
         department: DP !== "" ? DP : user.department,
-      }),
-    });
-    const updatedUser = await response.json();
-    console.log(updatedUser);
+      },
+      {
+        headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    },
+    )
+
+    
+    
+    const {data} = await response;
+    console.log(data);
     // setUser(updatedUser)
-    setFB(updatedUser.Facebook);
-    setIG(updatedUser.Instagram);
-    setIN(updatedUser.selfIntro);
-    setDP(updatedUser.department);
+    setFB(data.Facebook);
+    setIG(data.Instagram);
+    setIN(data.selfIntro);
+    setDP(data.department);
   });
 
   
