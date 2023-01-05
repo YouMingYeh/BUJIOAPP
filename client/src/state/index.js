@@ -6,6 +6,7 @@ const initialState = {
     participation: [],
     invitations: [],
     invitings: [],
+    friends: [],
   },
   token: null,
   activities: [],

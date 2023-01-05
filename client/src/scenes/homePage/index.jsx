@@ -15,12 +15,12 @@ const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { _id, picturePath } = useSelector((state) => state.user);
   const [isFetching, setIsFetching] = useState(true);
-  useEffect(() => {
-    setTimeout(function () {
+  // useEffect(() => {
+  //   setTimeout(function () {
       
-      setIsFetching(false); 
-    }, 500);
-  }, []);
+  //     setIsFetching(false); 
+  //   }, 500);
+  // }, []);
   
 
   return (
@@ -46,10 +46,10 @@ const HomePage = () => {
         >
           <MyActivityWidget picturePath={picturePath} />
 
-          {isFetching ? <LoadingPage reload={isFetching}></LoadingPage> :<ActivitiesWidget userId={_id} />}
+          <ActivitiesWidget userId={_id} />
         </Box>
         {isNonMobileScreens && (
-          isFetching ? <LoadingPage reload={isFetching}></LoadingPage> :
+          
           <Box flexBasis="26%">
             <InvitationWidget userId={_id} />
             <Divider sx={{ m: 1 }}></Divider>

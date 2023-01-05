@@ -12,7 +12,7 @@ import LoadingPage from "components/LoadingPage";
 import DeletedActivities from "scenes/widgets/DeletedActivitiesWidget";
 import api from '../../../src/connection'
 const ProfilePage = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const { userId } = useParams();
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -33,22 +33,21 @@ const ProfilePage = () => {
     getUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    setTimeout(function () {
+  // useEffect(() => {
+  //   setTimeout(function () {
       
-      setIsFetching(false); 
-    }, 1500);
-  }, []);
+  //     setIsFetching(false); 
+  //   }, 1500);
+  // }, []);
 
-  if (!user) return null;
+  
   
 
   
   return (
     <Box>
       <Navbar />
-      {
-        isFetching ? <LoadingPage reload={isFetching}></LoadingPage>:
+      
       <Box
         width="100%"
         padding="2rem 6%"
@@ -85,7 +84,7 @@ const ProfilePage = () => {
         </Box> */}
         
       </Box>
-      }
+      
     </Box>
   );
 };

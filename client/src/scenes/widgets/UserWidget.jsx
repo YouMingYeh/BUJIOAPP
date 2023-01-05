@@ -72,8 +72,6 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
       getUser(userId);
     }
   }, [FB, IG, IN, DP]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  
   
   const {
     firstName,

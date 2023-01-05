@@ -41,7 +41,6 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
   };
 
   useEffect(() => {
-    
     if (isProfile) {
       getUserActivities();
     } else {

@@ -206,12 +206,9 @@ const ActivityWidget = ({
 
   useEffect(() => {
     if (load === true) {
-      
       getPath();
-      
     }
-
-  }, [load,join]);
+  }, [load,join, change]);
 
   useEffect(() => {
     getPath();

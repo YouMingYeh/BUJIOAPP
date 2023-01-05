@@ -43,7 +43,7 @@ const DeletedActivities = ({ userId }) => {
 
   useEffect(() => {
     getActivities()
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [activities]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <WidgetWrapper sx={{ boxShadow: 1 }}>
