@@ -74,14 +74,14 @@ const ProfilePage = () => {
           <Box m="2rem 0" />
           <ActivitiesWidget profileId={userId} isProfile userId={_id} />
         </Box>
-        {/* <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           
           <Box m="2rem 0" />
           {
             userId === _id &&
             <DeletedActivities userId={_id}></DeletedActivities>
           }
-        </Box> */}
+        </Box>
         
       </Box>
       
