@@ -61,7 +61,9 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
+
     const data = await response.json();
+    console.log(data)
     setUser(data);
   });
 
