@@ -91,14 +91,15 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     const updatedUser = await response.json();
     console.log(updatedUser);
     // setUser(updatedUser)
-    setFB(updatedUser.user.Facebook);
-    setIG(updatedUser.user.Instagram);
-    setIN(updatedUser.user.selfIntro);
-    setDP(updatedUser.user.department);
+    setFB(updatedUser.Facebook);
+    setIG(updatedUser.Instagram);
+    setIN(updatedUser.selfIntro);
+    setDP(updatedUser.department);
   });
 
   
   if(!user) return
+  
 
   if (profileId) {
     return (

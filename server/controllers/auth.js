@@ -82,7 +82,7 @@ export const googleLogin = async (req, res) => {
         participation: {},
       });
       const savedUser = await newUser.save();
-
+      console.log(savedUser);
       const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
       res.status(200).json({ token, savedUser });
     } else {
