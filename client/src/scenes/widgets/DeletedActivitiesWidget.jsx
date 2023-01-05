@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme, Button, Divider, Modal } from "@mui/material";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setParticipation } from "state";
 import { useState } from 'react';
@@ -26,7 +26,7 @@ const DeletedActivities = ({ userId }) => {
     boxShadow: 24,
     p: 4,
   };
-  const getActivities = async () => {
+  const getActivities = useCallback(async () => {
     console.log("getting activities");
     const response = await fetch(`${api}/activities/${userId}`, {
       method: "GET",
@@ -37,7 +37,7 @@ const DeletedActivities = ({ userId }) => {
     
     setActivities(newActivities);
     
-  };
+  });
 
 
 

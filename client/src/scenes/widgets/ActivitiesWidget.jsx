@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivities } from "state";
 import ActivityWidget from "./ActivityWidget";
@@ -13,7 +13,7 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
   const [editOpen, setEditOpen] = useState();
   
 
-  const getActivities = async () => {
+  const getActivities = useCallback(async () => {
     console.log("getting activities");
     const response = await fetch(`${api}/activities/${userId}`, {
       method: "GET",
@@ -23,9 +23,9 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
     const newActivities = data.filter((activity) => !activity.deleted)
     dispatch(setActivities({ activities: newActivities }));
     
-  };
+  });
 
-  const getUserActivities = async () => {
+  const getUserActivities = useCallback(async () => {
     console.log("getting user activities");
     const response = await fetch(
       `${api}/activities/${profileId}/activities/${userId}`,
@@ -38,7 +38,7 @@ const ActivitiesWidget = ({ userId, isProfile = false, profileId = null }) => {
     const newActivities = data.filter((activity) => !activity.deleted)
     dispatch(setActivities({ activities: newActivities }));
     
-  };
+  });
 
   useEffect(() => {
     if (isProfile) {

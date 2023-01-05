@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useCallback } from "react";
 import {
   Box,
   IconButton,
@@ -80,7 +80,7 @@ const Navbar = ({ userId, picturePath }) => {
     p: 4,
   };
 
-  const getFinding = async () => {
+  const getFinding = useCallback(async () => {
     console.log(finding)
     const findingResponse = await fetch(`${api}/findings`, {
       method: "POST",
@@ -90,7 +90,7 @@ const Navbar = ({ userId, picturePath }) => {
     const findings = await findingResponse.json();
     console.log(findings)
     setResults(findings)
-  };
+  });
 
   return (
     <AppBar>

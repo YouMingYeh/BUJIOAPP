@@ -16,7 +16,7 @@ import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -56,14 +56,14 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   const [IN, setIN] = useState("");
   const [DP, setDP] = useState("");
 
-  const getUser = async (id) => {
+  const getUser = useCallback(async (id) => {
     const response = await fetch(`${api}/users/${id}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
     setUser(data);
-  };
+  });
 
   useEffect(() => {
     if (profileId) {
@@ -84,7 +84,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     email,
   } = user;
 
-  const patchUser = async () => {
+  const patchUser = useCallback(async () => {
     console.log(DP);
     const response = await fetch(`${api}/users/${userId}`, {
       method: "PATCH",
@@ -106,7 +106,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     setIG(updatedUser.Instagram);
     setIN(updatedUser.selfIntro);
     setDP(updatedUser.department);
-  };
+  });
 
   
 

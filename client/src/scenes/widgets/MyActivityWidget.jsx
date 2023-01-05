@@ -31,7 +31,7 @@ import FlexBetween from "components/FlexBetween";
 import Dropzone from "react-dropzone";
 import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useState } from "react";
+import { useState , useCallback} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivities } from "state";
 import { light } from "@mui/material/styles/createPalette";
@@ -79,7 +79,7 @@ const MyActivityWidget = ({ picturePath }) => {
     p: 4,
   };
 
-  const handlePost = async () => {
+  const handlePost = useCallback(async () => {
     const formData = new FormData();
     formData.append("userId", _id);
     formData.append("description", post);
@@ -103,7 +103,7 @@ const MyActivityWidget = ({ picturePath }) => {
     setImage(null);
     setPost("");
     setEditOpen(false)
-  };
+  });
 
   return (
     <WidgetWrapper sx={{ boxShadow: 1 }}>

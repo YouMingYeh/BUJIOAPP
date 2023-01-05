@@ -10,6 +10,7 @@ import { setFriends, setInvitations, setInvitings } from "state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 import api from '../../src/connection'
+import {useCallback} from 'react'
 const Friend = ({
   friendId,
   name,
@@ -36,7 +37,7 @@ const Friend = ({
   const isFriend = friends.find((friend) => friend._id === friendId);
   const isInvitings = invitings.find((friend) => friend._id === friendId);
 
-  const handleFriends = async () => {
+  const handleFriends = useCallback(async () => {
     const response = await fetch(
       `${api}/users/${_id}/${friendId}`,
       {
@@ -51,7 +52,7 @@ const Friend = ({
     dispatch(setFriends({ friends: data.friends }));
     dispatch(setInvitings({ invitings: data.invitings }));
     dispatch(setInvitations({ invitations: data.invitations }));
-  };
+  });
 
   return small ? (
     <FlexBetween>

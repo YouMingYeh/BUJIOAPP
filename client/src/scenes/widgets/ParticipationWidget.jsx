@@ -3,7 +3,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setParticipation } from "state";
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import ActivityWidget from "./ActivityWidget";
 import api from '../../../src/connection'
 
@@ -29,7 +29,7 @@ const ParticipationWidget = ({ userId }) => {
     boxShadow: 24,
     p: 4,
   };
-  const getUser = async () => {
+  const getUser = useCallback(async () => {
     const response = await fetch(`${api}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
@@ -39,10 +39,11 @@ const ParticipationWidget = ({ userId }) => {
     const p = data.participation
     // console.log(p);
     dispatch(setParticipation({ participation: p }));
-  };
+  });
 
   useEffect(() => {
     getUser();
+    
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

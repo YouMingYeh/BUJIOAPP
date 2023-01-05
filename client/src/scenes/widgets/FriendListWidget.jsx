@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "state";
 import api from '../../../src/connection'
@@ -12,7 +12,7 @@ const FriendListWidget = ({ userId }) => {
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
 
-  const getFriends = async () => {
+  const getFriends = useCallback(async () => {
     const response = await fetch(
       `${api}/users/${userId}/friends`,
       {
@@ -22,7 +22,7 @@ const FriendListWidget = ({ userId }) => {
     );
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
-  };
+  });
 
   useEffect(() => {
     getFriends();

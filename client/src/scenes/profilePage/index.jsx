@@ -1,5 +1,5 @@
 import { Backdrop, Box, useMediaQuery } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Navbar from "scenes/navbar";
@@ -19,7 +19,7 @@ const ProfilePage = () => {
   const { _id } = useSelector((state) => state.user);
   const [isFetching, setIsFetching] = useState(true);
 
-  const getUser = async () => {
+  const getUser = useCallback(async () => {
     const response = await fetch(`${api}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
@@ -27,7 +27,7 @@ const ProfilePage = () => {
     const data = await response.json();
     setUser(data);
     
-  };
+  });
 
   useEffect(() => {
     getUser();

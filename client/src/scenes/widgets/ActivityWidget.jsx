@@ -37,6 +37,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import EditModalWidget from "./components/EditModalWidget";
 import LoadingPage from "../../components/LoadingPage";
 import DeletedActivities from "./DeletedActivitiesWidget";
+import {useCallback} from 'react'
 import api from '../../../src/connection'
 const style = {
   position: 'absolute',
@@ -117,7 +118,7 @@ const ActivityWidget = ({
   // edit activity 
 
 
-  const patchActivity = async () => {
+  const patchActivity = useCallback(async () => {
 
     const response = await fetch(
       `${api}/activities/${activityId}`,
@@ -134,7 +135,7 @@ const ActivityWidget = ({
     dispatch(setActivity({ activity: updatedActivity }));
     console.log(updatedActivity);
     setLoad(true);
-  };
+  });
 
   // for menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -146,7 +147,7 @@ const ActivityWidget = ({
     setAnchorEl(null);
   };
 
-  const patchJoin = async () => {
+  const patchJoin = useCallback(async () => {
     
     const response = await fetch(
       `${api}/activities/${activityId}/join`,
@@ -165,9 +166,9 @@ const ActivityWidget = ({
     dispatch(setActivity({ activity: updatedActivity }));
 
     setLoad(true);
-  };
+    });
 
-  const getUser = async (id) => {
+  const getUser = useCallback(async (id) => {
     // console.log("get user");
     // console.log(JSON.stringify({ userId: loggedInUserId }))
     const response = await fetch(`${api}/users/${id}`, {
@@ -179,12 +180,12 @@ const ActivityWidget = ({
     });
     const user = await response.json();
     return user;
-  };
+  });
 
   const [path, setPath] = useState([]);
   const [participants, setParticipants] = useState([]);
 
-  const getPath = async () => {
+  const getPath = useCallback(async () => {
     
     let arr = Object.keys(join);
     let participants_path = [];
@@ -202,7 +203,7 @@ const ActivityWidget = ({
     dispatch(setParticipation({ participation: p }))
     setPath(participants_path);
     setParticipants(participants_inform);
-  };
+  });
 
   useEffect(() => {
     if (load === true) {

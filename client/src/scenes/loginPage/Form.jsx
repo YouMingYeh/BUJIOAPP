@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import jwt_decode from "jwt-decode";
 import {
   Box,
@@ -59,7 +59,7 @@ const Form = () => {
   const [dupe, setDupe] = useState(false);
   const [again, setAgain] = useState(false);
 
-  const handleCallbackResponse = async (response) => {
+  const handleCallbackResponse = useCallback(async (response) => {
     // console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
     const gResponse = await fetch(`${api}/auth/googleLogin`, {
@@ -82,7 +82,7 @@ const Form = () => {
     } else {
       setAgain(true)
     }
-  };
+  });
 
   useEffect(() => {
     /* global google */
@@ -98,7 +98,7 @@ const Form = () => {
     });
   }, []);
 
-  const register = async (values, onSubmitProps) => {
+  const register = useCallback(async (values, onSubmitProps) => {
     // this allows us to send form info with image
     const formData = new FormData();
     for (let value in values) {
@@ -125,7 +125,7 @@ const Form = () => {
         setPageType("login");
       }
     }
-  };
+  });
 
   const login = async (values, onSubmitProps) => {
     console.log("values: ", values);
@@ -157,10 +157,10 @@ const Form = () => {
     }
   };
 
-  const handleFormSubmit = async (values, onSubmitProps) => {
+  const handleFormSubmit = useCallback(async (values, onSubmitProps) => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
-  };
+  });
 
   return (
     <Formik
