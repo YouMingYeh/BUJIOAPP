@@ -18,8 +18,8 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/user.Facebook";
+import InstagramIcon from "@mui/icons-material/user.Instagram";
 import TextField from "@mui/material/TextField";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
@@ -27,16 +27,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import api from '../../../src/connection'
 
 const UserWidget = ({ userId, picturePath, profileId = null }) => {
-  const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    department: '',
-    friends: [],
-    Facebook: '',
-    Instagram: '',
-    selfIntro:'',
-    email: '',
-  });
+  const [user, setUser] = useState({});
   // const u = useSelector((state)=>state.user)
   const { palette } = useTheme();
   const navigate = useNavigate();
@@ -82,16 +73,11 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
     }
   }, [FB, IG, IN, DP]); // eslint-disable-line react-hooks/exhaustive-deps
   
-  const {
-    firstName,
-    lastName,
-    department,
-    friends,
-    Facebook,
-    Instagram,
-    selfIntro,
-    email,
-  } = user;
+  useEffect(()=>{
+
+  },[user])
+  
+  
 
   const patchUser = useCallback(async () => {
     console.log(DP);
@@ -102,19 +88,19 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        Facebook: FB !== "" ? FB : Facebook,
-        Instagram: IG !== "" ? IG : Instagram,
-        selfIntro: IN !== "" ? IN : selfIntro,
-        department: DP !== "" ? DP : department,
+        Facebook: FB !== "" ? FB : user.Facebook,
+        Instagram: IG !== "" ? IG : user.Instagram,
+        selfIntro: IN !== "" ? IN : user.selfIntro,
+        department: DP !== "" ? DP : user.department,
       }),
     });
     const updatedUser = await response.json();
     console.log(updatedUser);
     // setUser(updatedUser)
-    setFB(updatedUser.Facebook);
-    setIG(updatedUser.Instagram);
-    setIN(updatedUser.selfIntro);
-    setDP(updatedUser.department);
+    setFB(updatedUser.user.Facebook);
+    setIG(updatedUser.user.Instagram);
+    setIN(updatedUser.user.selfIntro);
+    setDP(updatedUser.user.department);
   });
 
   
@@ -142,9 +128,9 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                   },
                 }}
               >
-                {firstName} {lastName}
+                {user.firstName} {user.lastName}
               </Typography>
-              <Typography color={medium}>{friends.length} friends</Typography>
+              <Typography color={medium}>{user.friends.length} user.friends</Typography>
             </Box>
           </FlexBetween>
         </FlexBetween>
@@ -196,7 +182,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                 <Typography color={main} fontWeight="500">
                   Email
                 </Typography>
-                <Typography color={medium}>{email}</Typography>
+                <Typography color={medium}>{user.email}</Typography>
               </Box>
             </FlexBetween>
           </FlexBetween>
@@ -205,10 +191,10 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
               <FacebookIcon />
               <Box>
                 <Typography color={main} fontWeight="500">
-                  Facebook
+                  user.Facebook
                 </Typography>
 
-                <Typography color={medium}>{Facebook}</Typography>
+                <Typography color={medium}>{user.Facebook}</Typography>
               </Box>
             </FlexBetween>
           </FlexBetween>
@@ -218,9 +204,9 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
               <InstagramIcon />
               <Box>
                 <Typography color={main} fontWeight="500">
-                  Instagram
+                  user.Instagram
                 </Typography>
-                <Typography color={medium}>{Instagram}</Typography>
+                <Typography color={medium}>{user.Instagram}</Typography>
               </Box>
             </FlexBetween>
           </FlexBetween>
@@ -233,7 +219,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                   Self Introduction
                 </Typography>
 
-                <Typography color={medium}>{selfIntro}</Typography>
+                <Typography color={medium}>{user.selfIntro}</Typography>
               </Box>
             </FlexBetween>
           </FlexBetween>
@@ -246,7 +232,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                   Department
                 </Typography>
 
-                <Typography color={medium}>{department}</Typography>
+                <Typography color={medium}>{user.department}</Typography>
               </Box>
             </FlexBetween>
           </FlexBetween>
@@ -277,9 +263,9 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                 },
               }}
             >
-              {firstName} {lastName}
+              {user.firstName} {user.lastName}
             </Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
+            <Typography color={medium}>{user.friends.length} user.friends</Typography>
           </Box>
         </FlexBetween>
       </FlexBetween>
@@ -330,7 +316,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
               <Typography color={main} fontWeight="500">
                 Email
               </Typography>
-              <Typography color={medium}>{email}</Typography>
+              <Typography color={medium}>{user.email}</Typography>
             </Box>
           </FlexBetween>
         </FlexBetween>
@@ -339,7 +325,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
             <FacebookIcon />
             <Box>
               <Typography color={main} fontWeight="500">
-                Facebook
+                user.Facebook
               </Typography>
 
               {editFB ? (
@@ -354,7 +340,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                 />
               ) : (
                 <Typography color={medium}>
-                  {FB === "" ? Facebook : FB}
+                  {FB === "" ? user.Facebook : FB}
                 </Typography>
               )}
             </Box>
@@ -378,7 +364,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
             <InstagramIcon />
             <Box>
               <Typography color={main} fontWeight="500">
-                Instagram
+                user.Instagram
               </Typography>
               {editIG ? (
                 <TextField
@@ -392,7 +378,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                 />
               ) : (
                 <Typography color={medium}>
-                  {IG === "" ? Instagram : IG}
+                  {IG === "" ? user.Instagram : IG}
                 </Typography>
               )}
             </Box>
@@ -431,7 +417,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                 />
               ) : (
                 <Typography color={medium}>
-                  {IN === "" ? selfIntro : IN}
+                  {IN === "" ? user.selfIntro : IN}
                 </Typography>
               )}
             </Box>
@@ -470,7 +456,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
                 />
               ) : (
                 <Typography color={medium}>
-                  {DP === "" ? department : DP}
+                  {DP === "" ? user.department : DP}
                 </Typography>
               )}
             </Box>
