@@ -27,7 +27,16 @@ import EmailIcon from "@mui/icons-material/Email";
 import api from '../../../src/connection'
 
 const UserWidget = ({ userId, picturePath, profileId = null }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    department: '',
+    friends: [],
+    Facebook: '',
+    Instagram: '',
+    selfIntro:'',
+    email: '',
+  });
   // const u = useSelector((state)=>state.user)
   const { palette } = useTheme();
   const navigate = useNavigate();
@@ -65,10 +74,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   }, [FB, IG, IN, DP]); // eslint-disable-line react-hooks/exhaustive-deps
 
   
-  if (!user) {
-    return 
-  }
-
+  
   const {
     firstName,
     lastName,
