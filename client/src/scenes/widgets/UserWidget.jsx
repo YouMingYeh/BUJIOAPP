@@ -57,14 +57,20 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   const [DP, setDP] = useState("");
 
   const getUser = useCallback(async (id) => {
-    const response = await fetch(`${api}/users/${id}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    const data = await response.json();
-    console.log(data)
-    setUser(data);
+    try{
+      
+      const response = await fetch(`${api}/users/${id}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      const responseClone = await response.clone();
+      const data = await responseClone.json();
+      console.log(responseClone)
+      setUser(data);
+    }catch(e){
+      console.log(e);
+    }
   });
 
   useEffect(() => {
