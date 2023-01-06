@@ -61,7 +61,7 @@ const Friend = ({
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
-            navigate(0);
+            
           }}
         >
           <Typography
@@ -117,7 +117,7 @@ const Friend = ({
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
-            navigate(0);
+            
           }}
         >
           <Typography
