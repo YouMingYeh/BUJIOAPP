@@ -142,7 +142,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
               >
                 {user.firstName} {user.lastName}
               </Typography>
-              <Typography color={medium}>{user.friends.length} user.friends</Typography>
+              <Typography color={medium}>{user.friends.length} friends</Typography>
             </Box>
           </FlexBetween>
         </FlexBetween>
@@ -337,7 +337,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
             <FacebookIcon />
             <Box>
               <Typography color={main} fontWeight="500">
-                user.Facebook
+                Facebook
               </Typography>
 
               {editFB ? (
@@ -376,7 +376,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
             <InstagramIcon />
             <Box>
               <Typography color={main} fontWeight="500">
-                user.Instagram
+                Instagram
               </Typography>
               {editIG ? (
                 <TextField
