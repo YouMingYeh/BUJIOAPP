@@ -60,7 +60,7 @@ const ParticipationWidget = ({ userId }) => {
       <Divider></Divider>
       <Box display="flex" flexDirection="column" gap="1.5rem">
         {participation.map((p, i) => {
-          if (i === 0) return <div key={i}></div>
+          if (JSON.stringify(p) === '{}') return <div key={i}></div>
           return (
             <Button variant="text" key={p.heading + i + 'button'} color="inherit" onClick={() => {
               setOpenModal(!openModal)

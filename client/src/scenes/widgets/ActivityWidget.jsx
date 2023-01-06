@@ -120,6 +120,15 @@ const ActivityWidget = ({
 
   const patchActivity = useCallback(async () => {
 
+    var body
+    if(image){
+      body = JSON.stringify({ activity: {...change, picturePath: image.name},  picture: image})
+    }
+    else{
+      body = JSON.stringify({activity: change})
+    }
+    
+
     const response = await fetch(
       `${api}/activities/${activityId}`,
       {
@@ -128,7 +137,7 @@ const ActivityWidget = ({
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ activity: {...change, picturePath: image.name},  picture: image}),
+        body: body
       }
     );
     const updatedActivity = await response.json();
