@@ -28,7 +28,15 @@ import api from '../../../src/connection'
 import axios from "axios";
 
 const UserWidget = ({ userId, picturePath, profileId = null }) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    Facebook: '',
+    Instagram: '',
+    selfIntro: '',
+    department: '',
+    friends: []
+  });
   // const u = useSelector((state)=>state.user)
   const { palette } = useTheme();
   const navigate = useNavigate();
@@ -56,10 +64,12 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
         'Content-Type': 'application/json',
       })
       
+      
       const {data} = await response;
-      console.log(data)
+      
       setUser(data);
     }catch(e){
+      
       console.log('err:', e);
     }
   });
@@ -104,7 +114,7 @@ const UserWidget = ({ userId, picturePath, profileId = null }) => {
   });
 
   
-  if(!user) return
+  // if(!user) return
   
 
   if (profileId) {
