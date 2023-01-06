@@ -13,7 +13,7 @@ import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import activityRoutes from "./routes/activities.js";
 import { register } from "./controllers/auth.js";
-import { createActivity } from "./controllers/activity.js";
+import { createActivity, patchActivity } from "./controllers/activity.js";
 import { verifyToken } from "./middleware/auth.js";
 
 
@@ -37,16 +37,7 @@ app.get("/api", (req, res) => {
 if (process.env.NODE_ENV === "production") {
   
   app.use(express.static(path.join(__dirname, "../client", "build")));
-  app.get("/home", (req, res) => {
-    
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
- });
- 
- app.get("/profile", (req, res) => {
-    
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
-
+  
   
 }
 
@@ -79,6 +70,7 @@ app.use("/api/findings", findingsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/activities", activityRoutes);
+app.patch("/api/activities/:id", verifyToken,upload.single("picture"),  patchActivity);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
@@ -94,3 +86,4 @@ mongoose
     // Post.insertMany(posts);
   })
   .catch((error) => console.log(`${error} did not connect`));
+

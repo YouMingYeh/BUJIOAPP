@@ -94,7 +94,7 @@ const ActivityWidget = ({
   const participation = useSelector((state) => state.user.participation)
   const isJoined = Boolean(join[loggedInUserId]);
   const joinCount = Object.keys(join).length;
-
+  const [image, setImage] = useState(null)
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
@@ -128,7 +128,7 @@ const ActivityWidget = ({
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ activity: change }),
+        body: JSON.stringify({ activity: {...change, picturePath: image.name},  picture: image}),
       }
     );
     const updatedActivity = await response.json();
@@ -252,7 +252,7 @@ const ActivityWidget = ({
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <EditModalWidget change={change} setChange={setChange} />
+            <EditModalWidget change={change} setChange={setChange} image={image} setImage={setImage}/>
           </Box>
         </Modal>
       </FlexBetween>

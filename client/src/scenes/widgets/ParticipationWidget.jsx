@@ -36,7 +36,7 @@ const ParticipationWidget = ({ userId }) => {
     });
     const data = await response.json();
     // console.log(data.participation);
-    const p = data.participation
+    const p = data.participation.filter(activity=>!activity.deleted)
     // console.log(p);
     dispatch(setParticipation({ participation: p }));
   });

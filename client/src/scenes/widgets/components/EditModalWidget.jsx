@@ -39,9 +39,9 @@ import DeleteAlert from './DeleteAlert'
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 
-const EditModalWidget = ({ change, setChange }) => {
+const EditModalWidget = ({ change, setChange, image, setImage }) => {
   const [isImage, setIsImage] = useState(false);
-  const [image, setImage] = useState(null)
+  
   const { palette } = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const mediumMain = palette.neutral.mediumMain;

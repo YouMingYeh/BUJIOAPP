@@ -15,6 +15,5 @@ router.get("/:profileId/activities/:userId", verifyToken, getUserActivities);
 
 /* UPDATE */
 router.patch("/:id/join", verifyToken, joinActivity);
-router.patch("/:id", verifyToken, patchActivity);
 
 export default router;
