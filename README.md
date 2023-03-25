@@ -1,8 +1,5 @@
-# FullStack Social Media App
-
-Complete React MERN Full Stack Social Media App
-
-For users who are looking to contribute, I'm planning to possibly create a separate branch for community contributions and additional features as well as for improvements and fixes.
-
-I haven't decided on the exact workflow I'll be using yet. But we'll get it out there soon!
 # BUJIOAPP
+這是一個社群網站專案
+##使用技術
+1. React框架
+2. mo
