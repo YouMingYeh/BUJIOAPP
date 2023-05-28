@@ -1,4 +1,10 @@
 // color design tokens export
+
+import color from 'color';
+
+const baseColor = color('#F37E2B');
+
+
 export const colorTokens = {
   grey: {
     0: "#FFFFFF",
@@ -16,16 +22,17 @@ export const colorTokens = {
     1000: "#000000",
   },
   primary: {
-    50: "#E6FBFF",
-    100: "#CCF7FE",
-    200: "#99EEFD",
-    300: "#66E6FC",
-    400: "#33DDFB",
-    500: "#00D5FA",
-    600: "#00A0BC",
-    700: "#006B7D",
-    800: "#00353F",
-    900: "#001519",
+    50: baseColor.lighten(0.9).hex(),
+    100: baseColor.lighten(0.8).hex(),
+    200: baseColor.lighten(0.6).hex(),
+    300: baseColor.lighten(0.4).hex(),
+    400: baseColor.lighten(0.2).hex(),
+    500: baseColor.hex(),
+    600: baseColor.darken(0.2).hex(),
+    700: baseColor.darken(0.4).hex(),
+    800: baseColor.darken(0.6).hex(),
+    900: baseColor.darken(0.8).hex(),
+    1000: baseColor.darken(0.9).hex(),
   },
 };
 

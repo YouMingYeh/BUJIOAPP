@@ -1,4 +1,4 @@
-import { useState,useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   Box,
   IconButton,
@@ -12,9 +12,9 @@ import {
   Modal,
   Tooltip,
   Badge,
-  AppBar
+  AppBar,
 } from "@mui/material";
-import PersonSearchOutlinedIcon from '@mui/icons-material/PersonSearchOutlined';
+import PersonSearchOutlinedIcon from "@mui/icons-material/PersonSearchOutlined";
 import {
   Search,
   Message,
@@ -30,7 +30,7 @@ import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
-import api from '../../../src/connection'
+import api from "../../../src/connection";
 import HorizontalLinearStepper from "components/Helper";
 
 import { setFilter } from "state";
@@ -39,7 +39,7 @@ const Navbar = ({ userId, picturePath }) => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const [openPopover, setOpenPopover] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [finding, setFinding] = useState('');
+  const [finding, setFinding] = useState("");
   const [results, setResults] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,49 +52,48 @@ const Navbar = ({ userId, picturePath }) => {
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
-  const [openHelp, setOpenHelp] = useState(false)
-  const [start, setStart] = useState(true)
-  const filter = useSelector((state) => state.filter)
+  const [openHelp, setOpenHelp] = useState(false);
+  const [start, setStart] = useState(true);
+  const filter = useSelector((state) => state.filter);
   const fullName = `${user.firstName} ${user.lastName}`;
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
   const style2 = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 800,
 
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
 
   const getFinding = useCallback(async () => {
-    console.log(finding)
+    console.log(finding);
     const findingResponse = await fetch(`${api}/findings`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: finding }),
     });
     const findings = await findingResponse.json();
-    console.log(findings)
-    setResults(findings)
+    console.log(findings);
+    setResults(findings);
   });
 
   return (
     <AppBar>
-
       <FlexBetween padding="1rem 6%" backgroundColor={alt}>
         <FlexBetween gap="1.75rem">
           <Typography
@@ -109,7 +108,7 @@ const Navbar = ({ userId, picturePath }) => {
               },
             }}
           >
-            bujio
+            joasobi
           </Typography>
           {isNonMobileScreens && (
             <>
@@ -120,9 +119,13 @@ const Navbar = ({ userId, picturePath }) => {
                 gap="3rem"
                 padding="0.1rem 1.5rem"
               >
-
-                <InputBase placeholder="Search..." onChange={(key) => dispatch(setFilter({ filter: key.target.value }))} value={filter} />
-
+                <InputBase
+                  placeholder="Search..."
+                  onChange={(key) =>
+                    dispatch(setFilter({ filter: key.target.value }))
+                  }
+                  value={filter}
+                />
               </FlexBetween>
               {/* {filter !=='' && <Chip label={filter} sx={{fontWeight: '550'}}></Chip>} */}
             </>
@@ -142,23 +145,31 @@ const Navbar = ({ userId, picturePath }) => {
               </IconButton>
             </Tooltip>
 
-            <Tooltip title='search users'>
-              <IconButton onClick={() => { setOpenModal(!openModal) }}>
+            <Tooltip title="search users">
+              <IconButton
+                onClick={() => {
+                  setOpenModal(!openModal);
+                }}
+              >
                 {theme.palette.mode === "dark" ? (
                   <PersonSearchOutlinedIcon sx={{ fontSize: "25px" }} />
                 ) : (
-                  <PersonSearchOutlinedIcon sx={{ color: dark, fontSize: "25px" }} />
+                  <PersonSearchOutlinedIcon
+                    sx={{ color: dark, fontSize: "25px" }}
+                  />
                 )}
               </IconButton>
             </Tooltip>
 
             <Modal
               open={openModal}
-              onClose={() => { setOpenModal(false) }}
+              onClose={() => {
+                setOpenModal(false);
+              }}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style} >
+              <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   <FlexBetween
                     backgroundColor={neutralLight}
@@ -166,7 +177,12 @@ const Navbar = ({ userId, picturePath }) => {
                     gap="3rem"
                     padding="0.1rem 1.5rem"
                   >
-                    <InputBase placeholder="Search..." onChange={(e) => { setFinding(e.target.value) }} />
+                    <InputBase
+                      placeholder="Search..."
+                      onChange={(e) => {
+                        setFinding(e.target.value);
+                      }}
+                    />
                     <IconButton onClick={getFinding}>
                       <Search />
                     </IconButton>
@@ -174,7 +190,10 @@ const Navbar = ({ userId, picturePath }) => {
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   {results.map((friend) => (
-                    <Typography key={friend._id} sx={{ px: "0.6rem", py: "0.2rem" }}>
+                    <Typography
+                      key={friend._id}
+                      sx={{ px: "0.6rem", py: "0.2rem" }}
+                    >
                       <Friend
                         key={friend._id}
                         friendId={friend._id}
@@ -189,43 +208,46 @@ const Navbar = ({ userId, picturePath }) => {
               </Box>
             </Modal>
 
-            <Tooltip title='help?'>
-              <IconButton variant="outline" onClick={() => {
-                setStart(false)
-                setOpenHelp(true)
-              }}>
-                {start ?
+            <Tooltip title="help?">
+              <IconButton
+                variant="outline"
+                onClick={() => {
+                  setStart(false);
+                  setOpenHelp(true);
+                }}
+              >
+                {start ? (
                   <Badge color="secondary" variant="dot">
                     {theme.palette.mode === "dark" ? (
-                      < Help sx={{ fontSize: "25px" }} />
+                      <Help sx={{ fontSize: "25px" }} />
                     ) : (
-                      < Help sx={{ color: dark, fontSize: "25px" }} />
+                      <Help sx={{ color: dark, fontSize: "25px" }} />
                     )}
                   </Badge>
-                  :
-                  theme.palette.mode === "dark" ? (
-                    < Help sx={{ fontSize: "25px" }} />
-                  ) : (
-                    < Help sx={{ color: dark, fontSize: "25px" }} />
-                  )
-                }
+                ) : theme.palette.mode === "dark" ? (
+                  <Help sx={{ fontSize: "25px" }} />
+                ) : (
+                  <Help sx={{ color: dark, fontSize: "25px" }} />
+                )}
               </IconButton>
             </Tooltip>
             <Modal
               open={openHelp}
-              onClose={() => { setOpenHelp(false) }}
+              onClose={() => {
+                setOpenHelp(false);
+              }}
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={style2} borderRadius='1rem'>
-                <Typography id="modal-modal-title" >
-
-                  <HorizontalLinearStepper userId={userId} picturePath={picturePath}></HorizontalLinearStepper>
-
+              <Box sx={style2} borderRadius="1rem">
+                <Typography id="modal-modal-title">
+                  <HorizontalLinearStepper
+                    userId={userId}
+                    picturePath={picturePath}
+                  ></HorizontalLinearStepper>
                 </Typography>
               </Box>
             </Modal>
-
 
             <FormControl variant="standard" value={fullName}>
               <Select
@@ -248,7 +270,9 @@ const Navbar = ({ userId, picturePath }) => {
                 <MenuItem value={fullName}>
                   <Typography>{fullName}</Typography>
                 </MenuItem>
-                <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
+                <MenuItem onClick={() => dispatch(setLogout())}>
+                  Log Out
+                </MenuItem>
               </Select>
             </FormControl>
           </FlexBetween>
@@ -258,83 +282,80 @@ const Navbar = ({ userId, picturePath }) => {
           >
             <Menu />
           </IconButton>
-        )
-        }
+        )}
 
         {/* MOBILE NAV */}
-        {
-          !isNonMobileScreens && isMobileMenuToggled && (
-            <Box
-              position="fixed"
-              right="0"
-              bottom="0"
-              height="100%"
-              zIndex="10"
-              maxWidth="500px"
-              minWidth="300px"
-              backgroundColor={background}
-            >
-              {/* CLOSE ICON */}
-              <Box display="flex" justifyContent="flex-end" p="1rem">
-                <IconButton
-                  onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
-                >
-                  <Close />
-                </IconButton>
-              </Box>
-
-              {/* MENU ITEMS */}
-              <FlexBetween
-                display="flex"
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-                gap="3rem"
+        {!isNonMobileScreens && isMobileMenuToggled && (
+          <Box
+            position="fixed"
+            right="0"
+            bottom="0"
+            height="100%"
+            zIndex="10"
+            maxWidth="500px"
+            minWidth="300px"
+            backgroundColor={background}
+          >
+            {/* CLOSE ICON */}
+            <Box display="flex" justifyContent="flex-end" p="1rem">
+              <IconButton
+                onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
               >
-                <IconButton
-                  onClick={() => dispatch(setMode())}
-                  sx={{ fontSize: "25px" }}
-                >
-                  {theme.palette.mode === "dark" ? (
-                    <DarkMode sx={{ fontSize: "25px" }} />
-                  ) : (
-                    <LightMode sx={{ color: dark, fontSize: "25px" }} />
-                  )}
-                </IconButton>
-                <Message sx={{ fontSize: "25px" }} />
-                <Notifications sx={{ fontSize: "25px" }} />
-                <Help sx={{ fontSize: "25px" }} />
-                <FormControl variant="standard" value={fullName}>
-                  <Select
-                    value={fullName}
-                    sx={{
-                      backgroundColor: neutralLight,
-                      width: "150px",
-                      borderRadius: "0.25rem",
-                      p: "0.25rem 1rem",
-                      "& .MuiSvgIcon-root": {
-                        pr: "0.25rem",
-                        width: "3rem",
-                      },
-                      "& .MuiSelect-select:focus": {
-                        backgroundColor: neutralLight,
-                      },
-                    }}
-                    input={<InputBase />}
-                  >
-                    <MenuItem value={fullName}>
-                      <Typography>{fullName}</Typography>
-                    </MenuItem>
-                    <MenuItem onClick={() => dispatch(setLogout())}>
-                      Log Out
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </FlexBetween>
+                <Close />
+              </IconButton>
             </Box>
-          )
-        }
-      </FlexBetween >
+
+            {/* MENU ITEMS */}
+            <FlexBetween
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              gap="3rem"
+            >
+              <IconButton
+                onClick={() => dispatch(setMode())}
+                sx={{ fontSize: "25px" }}
+              >
+                {theme.palette.mode === "dark" ? (
+                  <DarkMode sx={{ fontSize: "25px" }} />
+                ) : (
+                  <LightMode sx={{ color: dark, fontSize: "25px" }} />
+                )}
+              </IconButton>
+              <Message sx={{ fontSize: "25px" }} />
+              <Notifications sx={{ fontSize: "25px" }} />
+              <Help sx={{ fontSize: "25px" }} />
+              <FormControl variant="standard" value={fullName}>
+                <Select
+                  value={fullName}
+                  sx={{
+                    backgroundColor: neutralLight,
+                    width: "150px",
+                    borderRadius: "0.25rem",
+                    p: "0.25rem 1rem",
+                    "& .MuiSvgIcon-root": {
+                      pr: "0.25rem",
+                      width: "3rem",
+                    },
+                    "& .MuiSelect-select:focus": {
+                      backgroundColor: neutralLight,
+                    },
+                  }}
+                  input={<InputBase />}
+                >
+                  <MenuItem value={fullName}>
+                    <Typography>{fullName}</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={() => dispatch(setLogout())}>
+                    Log Out
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </FlexBetween>
+          </Box>
+        )}
+      </FlexBetween>
     </AppBar>
   );
 };

@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
-import api from '../../../src/connection'
+import api from "../../../src/connection";
 const LoginPage = () => {
   const theme = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
@@ -14,7 +14,7 @@ const LoginPage = () => {
         textAlign="center"
       >
         <Typography fontWeight="bold" fontSize="32px" color="primary">
-          bujio
+          joasobi
         </Typography>
       </Box>
 
@@ -26,7 +26,7 @@ const LoginPage = () => {
         backgroundColor={theme.palette.background.alt}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          bujio? bujio bujio bujio?
+          joasobi? joasobi joasobi joasobi?
         </Typography>
         <Form />
       </Box>
